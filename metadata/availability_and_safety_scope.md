@@ -24,7 +24,7 @@ The public bundle excludes:
 
 ## Controlled Archive
 
-The private controlled archive retains raw generations, untrimmed outputs, and exact safety-test prompt artifacts for verification. The public bundle is designed to preserve provenance and claim auditability while keeping high-risk generated text separate from the public release.
+The private controlled archive retains raw generations, untrimmed outputs, and exact safety-test prompt artifacts. These retained materials are available from the author upon reasonable request for verification. The public bundle is designed to preserve provenance and claim auditability while keeping high-risk generated text separate from the public release.
 
 ## License Note
 

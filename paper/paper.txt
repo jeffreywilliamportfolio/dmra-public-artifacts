@@ -141,7 +141,7 @@ The purpose of DMRA is protective. Dialect-conditioned assistance differences ca
 
 The manuscript source and reproducibility metadata are prepared for public release with the preprint. A sanitized public artifact bundle is available at <https://github.com/jeffreywilliamportfolio/dmra-public-artifacts>. The bundle contains the run manifest, model identifiers and hashes, deterministic decoding settings, checksums, and redacted case-evidence summaries. The public bundle excludes model weights, environment files, secrets, full raw safety-test generations, slur-containing prompt text, and operationally harmful completions.
 
-Full raw generations are retained in a private controlled archive at <https://github.com/jeffreywilliamportfolio/dmra-controlled-archive>. The retained archive preserves file-level provenance and checksums for verification while keeping high-risk generated text separate from the public release.
+Full raw generations are retained in a private controlled archive and are available from the author upon reasonable request for verification. The retained archive preserves file-level provenance and checksums while keeping high-risk generated text separate from the public release.
 
 ## Conclusion
 

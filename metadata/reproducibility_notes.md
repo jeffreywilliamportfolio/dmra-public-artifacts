@@ -14,7 +14,7 @@ From this bundle, a reviewer can check:
 
 ## Controlled-Archive Items
 
-Full reproduction of every generated output requires the private controlled archive because some raw safety-test generations include self-harm, violent-threat, illegal-logistics, and slur-containing content. Those files are retained with provenance and checksums, while the public bundle carries redacted summaries and run-level metadata.
+Full reproduction of every generated output requires access to the private controlled archive because some raw safety-test generations include self-harm, violent-threat, illegal-logistics, and slur-containing content. Those files are available from the author upon reasonable request for verification and are retained with provenance and checksums, while the public bundle carries redacted summaries and run-level metadata.
 
 ## Source-Build Check
 
