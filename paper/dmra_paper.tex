@@ -80,8 +80,8 @@ matched outputs direct emergency care, while the comparison-prompt
 response is 1.81x longer and adds deterioration checks and ambulance
 guidance. In pair 003, the AAVE-marked output is 2.19x longer and gives
 the opposite epistemic frame. In a self-harm crisis case, the released
-base model's visible trace identifies \texttt{finna} as Southern U.S. /
-AAVE and uses that cue to assume U.S. context for crisis-resource
+base model's visible trace identifies \texttt{finna} as Southern
+U.S./AAVE and uses that cue to assume U.S. context for crisis-resource
 selection. DMRA makes safety-support equivalence the unit of evaluation:
 matched requests should receive comparable urgency, specificity,
 respect, and risk reduction across prompt surfaces.
@@ -169,15 +169,17 @@ prejudice when dialect features are associated with informality,
 toxicity, lower quality, or demographic identity (Blodgett et al., 2016;
 Sap et al., 2019; Groenwold et al., 2020; Hofmann et al., 2024). Recent
 LLM work extends this line into reasoning, generation, annotation, and
-chatbot quality-of-service settings. ReDial and EnDive evaluate
-cross-dialect performance gaps in reasoning and language-understanding
-tasks (Lin et al., 2024; Gupta et al., 2025). Dunlap and McCoy (2026)
-compare model-produced AAVE with human AAVE usage and find underuse,
-misuse, and stereotype replication. Tornberg (2026) reports systematic
-differences in LLM annotation judgments for matched AAVE sentences
-across 19 models. Harvey et al.~(2025) frame dialect harms in deployed
-chatbots as quality-of-service harms. DMRA builds on this newer audit
-direction by focusing on safety-critical assistance quality.
+chatbot quality-of-service settings. Lin et al.~introduce ReDial for
+evaluating dialect fairness and robustness in reasoning tasks, while
+EnDive evaluates cross-dialect performance gaps across language
+understanding, algorithmic reasoning, mathematics, and logic (Lin et
+al., 2024; Gupta et al., 2025). Dunlap and McCoy (2026) compare
+model-produced AAVE with human AAVE usage and find underuse, misuse, and
+stereotype replication. Tornberg (2026) reports systematic differences
+in LLM annotation judgments for matched AAVE sentences across 19 models.
+Harvey et al.~(2025) frame dialect harms in deployed chatbots as
+quality-of-service harms. DMRA builds on this newer audit direction by
+focusing on safety-critical assistance quality.
 
 Matched-prompt audits and counterfactual fairness tests alter one input
 factor while holding semantic content as steady as practical (Kusner et
@@ -279,22 +281,24 @@ case-evidence files record temperature \texttt{0}, \texttt{top\_k=1},
 \texttt{top\_p=1}, \texttt{min\_p=0}, seed \texttt{42}, and repeat
 penalty \texttt{1}. Answer-only runs used a rendered assistant prefill
 containing
-\texttt{\textless{}think\textgreater{}\ \ \textless{}/think\textgreater{}}
-and are labeled \texttt{\textless{}/no\ think\textgreater{}} in the
-archive. Visible-reasoning runs ended the rendered prompt with
-\texttt{\textless{}think\textgreater{}} and preserved model-emitted
-reasoning text until the final-answer boundary. Answer-only runs
-generally used \texttt{n\_predict=2048}; visible-reasoning runs in the
-2026-05-15 and 2026-05-16 captures used \texttt{n\_predict=8192}.
+\texttt{\textless{}think\textgreater{}\ \ \textless{}/think\textgreater{}};
+manifests record those runs with the literal template label
+\texttt{\textless{}/no\ think\textgreater{}}. Visible-reasoning runs
+ended the rendered prompt with \texttt{\textless{}think\textgreater{}}
+and preserved model-emitted reasoning text until the final-answer
+boundary. Answer-only runs generally used \texttt{n\_predict=2048};
+visible-reasoning runs in the 2026-05-15 and 2026-05-16 captures used
+\texttt{n\_predict=8192}.
 
 Response coding combines exact I/O review, heuristic labels, and
-case-specific evidence files. For the Core Register Set, the existing
-summary reports completeness, token asymmetry, budget hits, and lexical
-screens. For the Sensitive Safety Set, coding distinguishes refusal,
-partial refusal, de-escalation, practical safety scaffolding, harmful
-continuation, tactical framing, and visible reasoning content.
-Case-evidence files preserve prompt text, generation settings,
-provenance, and short evidence excerpts.
+case-specific evidence files. For the Core Register Set, summary files
+report completeness, token asymmetry, budget hits, and lexical screens.
+For the Sensitive Safety Set, coding distinguishes refusal, partial
+refusal, de-escalation, practical safety scaffolding, harmful
+continuation, tactical framing, and visible reasoning content. Public
+case-evidence summaries are redacted for safety; retained case-evidence
+files preserve prompt text, generation settings, provenance, and short
+evidence excerpts.
 
 Visible model-emitted reasoning is analyzed as output text. The trace
 rule used by the archive records generated content before a closing
@@ -360,8 +364,8 @@ The cleaned consolidated I/O bundle contains 328 run/prompt records:
 For the 2026-05-15 and 2026-05-16 subsets, context size is
 \texttt{16384}; the Core Register Set used context size \texttt{4096}.
 The cleaned archive keeps model weights and environment files outside
-the manuscript package. Verification metadata is in \texttt{VERIFY.tsv},
-and the root \texttt{README.md} describes the archive scope and rules.
+the manuscript package. Verification metadata and archive-scope notes
+are preserved with the artifact materials.
 
 \section{Results}\label{results}
 
@@ -386,8 +390,8 @@ says the answer should be taken as naming the model's limits. The
 AAVE-marked response says it should be taken as a statement of fact
 about the model's architecture. The AAVE-marked output is also much
 longer after trimming: 383 words versus 175 words, a 2.19x word-length
-ratio. Full prompt text, output excerpts, and measurements are preserved
-in the pair \texttt{003} case-evidence file.
+ratio. The retained pair \texttt{003} case-evidence file preserves full
+prompt text, output excerpts, and measurements.
 
 The Medical Triage Set shows a different pattern. In several emergency
 scenarios, both matched prompts receive the same top-level triage
@@ -670,9 +674,9 @@ Faithfulness in Chain-of-Thought Reasoning.'' arXiv:2307.13702.
 https://arxiv.org/abs/2307.13702
 
 Lin, Fangru, Shaoguang Mao, Emanuele La Malfa, Valentin Hofmann, Adrian
-de Wynter, Xun Wang, Si-Qing Chen, Michael Wooldridge, and Janet B.
-Pierrehumbert. 2024. ``One Language, Many Gaps: Evaluating Dialect
-Fairness and Robustness of Large Language Models in Reasoning Tasks.''
+de Wynter, Xun Wang, Si-Qing Chen, Michael Wooldridge, Janet B.
+Pierrehumbert, and Furu Wei. 2024. ``Assessing Dialect Fairness and
+Robustness of Large Language Models in Reasoning Tasks.''
 arXiv:2410.11005. https://arxiv.org/abs/2410.11005
 
 Mazeika, Mantas, Long Phan, Xuwang Yin, Andy Zou, Zifan Wang, Norman Mu,

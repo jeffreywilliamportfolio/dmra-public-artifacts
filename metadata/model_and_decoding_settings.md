@@ -39,6 +39,6 @@ Context and generation budgets:
 
 ## Templates
 
-- Answer-only runs used a rendered assistant prefill containing `<think>  </think>` and are labeled `</no think>` in the archive.
+- Answer-only runs used a rendered assistant prefill containing `<think>  </think>`; manifests record those runs with the literal template label `</no think>`.
 - Visible-reasoning runs ended the rendered prompt with `<think>` and preserved model-emitted reasoning text until the final-answer boundary.
 - Visible traces are treated as generated output text, not as hidden model cognition.
