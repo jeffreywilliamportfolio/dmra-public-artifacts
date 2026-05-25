@@ -1,0 +1,204 @@
+---
+title: "Dialect-Marked Response Audit (DMRA): A Matched-Pair Safety Evaluation of AAVE-Marked Prompt Surfaces in Qwen3.5-35B-A3B"
+author: "Jeffrey Shorthill"
+date: "May 19, 2026"
+keywords: "large language models, dialect fairness, AAVE, safety evaluation, matched-pair audit, reasoning traces"
+abstract: |
+  As large language models become first-contact interfaces for safety-critical advice, dialect-conditioned assistance quality becomes a deployment concern. Existing safety evaluations emphasize refusal presence and aggregate performance, leaving matched-intent register effects undermeasured. We introduce **Dialect-Marked Response Audit (DMRA)**, an I/O-level matched-pair protocol for comparing responses to African American Vernacular English (AAVE)-marked prompt surfaces and paired comparison prompts. We apply DMRA to Qwen3.5-35B-A3B and a refusal-reduced HauhauCS fine-tune under deterministic decoding across 328 run/prompt records over 66 matched pairs in five audit subsets: Core Register Set, Medical Triage Set, Chest-Pain Triage Extension, Financial-Stress Pair, and Sensitive Safety Set. The audit documents response differentials in epistemic framing, pediatric emergency scaffolding, financial-stress empathy, visible dialect-to-demographic inference, and high-risk scenario continuation. The clearest policy-facing case is pediatric respiratory distress: both matched outputs direct emergency care, while the comparison-prompt response is 1.81x longer and adds deterioration checks and ambulance guidance. In pair 003, the AAVE-marked output is 2.19x longer and gives the opposite epistemic frame. In a self-harm crisis case, the released base model's visible trace identifies `finna` as Southern U.S. / AAVE and uses that cue to assume U.S. context for crisis-resource selection. DMRA makes safety-support equivalence the unit of evaluation: matched requests should receive comparable urgency, specificity, respect, and risk reduction across prompt surfaces.
+---
+
+## Introduction
+
+Large language models are increasingly used as first-contact assistants for questions that carry safety consequences outside formal clinical, legal, or crisis-service settings. A caregiver may ask whether a wheezing child needs emergency care. A worker under financial pressure may ask for advice while describing despair. A user in a self-harm crisis may ask what to do tonight. A user contemplating violence or illegal logistics may seek help in language that includes slang, profanity, or register-specific grammar. In these settings, response quality includes timely triage, concrete safety steps, appropriate de-escalation, and a response frame that preserves the user's dignity.[^content-warning]
+
+Dialect equity matters because dialect is structured language. African American Vernacular English (AAVE) has grammar, discourse conventions, and lexical patterns; it is also socially stigmatized and often racialized by listeners and classifiers. A safety-critical assistant should deliver equivalent caution, practical detail, and respect across register surfaces. This paper asks whether, under matched semantic conditions, an LLM changes safety-relevant response behavior when prompts contain AAVE-marked features.
+
+The study uses constructed prompt surfaces. We use **AAVE-marked prompts** for prompts that contain selected AAVE-associated morphosyntax, lexical items, discourse stance, or social-address forms. We use **paired comparison prompts** for the matched counterpart prompts in the archive. The paired comparison side varies across audit subsets in formality and lexical choice, so the paper treats it as a corpus condition, rather than a homogeneous variety. Archive paths and manifests retain legacy labels such as `aave`, `ae`, and `academic_english`; in this paper those labels function as provenance identifiers.
+
+Existing refusal-rate and aggregate-accuracy evaluations capture important safety behavior, yet assistance quality also varies after a model reaches the same top-level safety outcome. In the pediatric respiratory-distress pair, both matched outputs direct emergency care, while the comparison-prompt response adds deterioration checks and ambulance guidance. In the violence stress test, both matched outputs contain harmful continuation, while the AAVE-marked response frames the confrontation more directly as a timing and feasibility problem. These cases motivate a unit of evaluation centered on equivalent safety support.
+
+We use "register-conditioned response selection" descriptively. It means that the model selects a different response frame, level of detail, safety strategy, or continuation trajectory when the prompt surface changes while the scenario remains matched. The evidence is generated text and visible model-emitted reasoning. Internal mechanism claims require separate mechanistic work.
+
+This paper makes three contributions:
+
+- It defines **Dialect-Marked Response Audit (DMRA)**, a matched-pair audit protocol for detecting differences in safety-critical assistance across AAVE-marked and paired comparison prompt surfaces.
+- It reports a multi-domain audit of base Qwen3.5-35B-A3B and a refusal-reduced HauhauCS fine-tune, covering 328 run/prompt records over 66 unique matched pairs.
+- It documents five high-salience response differentials that refusal presence alone would compress: epistemic framing, pediatric emergency scaffolding, financial-stress empathy, visible dialect-to-demographic inference, and high-risk scenario continuation.
+
+[^content-warning]: Content warning: the audit includes self-harm crisis language, violent-threat prompts, illegal-logistics prompts, and masked slurs. Public excerpts use minimal evidence phrases and redaction for operational detail.
+
+## Related Work
+
+Prior work on dialect bias has shown that NLP systems encode linguistic prejudice when dialect features are associated with informality, toxicity, lower quality, or demographic identity (Blodgett et al., 2016; Sap et al., 2019; Groenwold et al., 2020; Hofmann et al., 2024). Recent LLM work extends this line into reasoning, generation, annotation, and chatbot quality-of-service settings. ReDial and EnDive evaluate cross-dialect performance gaps in reasoning and language-understanding tasks (Lin et al., 2024; Gupta et al., 2025). Dunlap and McCoy (2026) compare model-produced AAVE with human AAVE usage and find underuse, misuse, and stereotype replication. Tornberg (2026) reports systematic differences in LLM annotation judgments for matched AAVE sentences across 19 models. Harvey et al. (2025) frame dialect harms in deployed chatbots as quality-of-service harms. DMRA builds on this newer audit direction by focusing on safety-critical assistance quality.
+
+Matched-prompt audits and counterfactual fairness tests alter one input factor while holding semantic content as steady as practical (Kusner et al., 2017; Ribeiro et al., 2020; Parrish et al., 2022). Recent dialect-audit work emphasizes ecological validity, dynamic prompts, and user-facing quality-of-service outcomes (Harvey et al., 2025). DMRA adopts this logic while treating dialect-marked prompting as a bundled surface intervention. AAVE-marked and paired comparison prompts may vary in syntax, lexicon, stance, profanity, politeness, and social cues. The results therefore support I/O-level claims about prompt-surface-conditioned behavior.
+
+LLM safety evaluation commonly measures refusal behavior, safe-completion adherence, and harmful-request handling (Gehman et al., 2020; Roettger et al., 2023; Zou et al., 2023; Mazeika et al., 2024). Recent work separates refusal from generation safety in long-tail obfuscated inputs (Maskey et al., 2025) and characterizes selective refusal bias across demographic targets (Khorramrouz and Levy, 2025). DMRA complements those evaluations by coding the response frame around the top-level safety outcome. Emergency and crisis prompts can receive the same triage decision with different urgency, specificity, empathy, or real-time scaffolding. High-risk prompts can receive similar refusal status while diverging in tactical framing.
+
+Visible model-emitted reasoning traces provide an additional output surface for audit. Prior work urges care when interpreting chain-of-thought faithfulness (Turpin et al., 2023; Lanham et al., 2023). Newer monitorability work treats chain-of-thought as a safety-relevant oversight surface and studies legibility, coverage, faithfulness, and verbosity (Korbak et al., 2025; Emmons et al., 2025; Meek et al., 2025). Bias-oriented trace work also shows that models may articulate some cue types differently from others (Balasubramanian et al., 2025). DMRA treats visible traces as generated text shown to an auditor or user-facing interface, rather than as a direct window into hidden computation. When a model emits a trace that turns a dialect marker into location or community context, that trace itself becomes audit evidence.
+
+## Dialect-Marked Response Audit
+
+DMRA asks whether matched prompt surfaces produce materially different model behavior in safety-relevant contexts. Material difference includes triage correctness, urgency, safety scaffolding, de-escalation, empathy frame, stereotype or demographic inference, harmful continuation, tactical detail, and visible reasoning content.
+
+The cleaned archive contains matched prompt pairs in five reader-facing audit subsets; dates preserve file-level provenance:
+
+- **Core Register Set** (2026-05-05): 50 matched pairs covering everyday register variation;
+- **Medical Triage Set** (2026-05-15): 5 matched pairs covering pediatric and adult health triage;
+- **Chest-Pain Triage Extension** (2026-05-15): 6 matched pairs extending the medical triage scenarios;
+- **Financial-Stress Pair** (2026-05-15): 1 matched pair covering economic strain and family/work advice;
+- **Sensitive Safety Set** (2026-05-16): 4 matched pairs covering self-harm, violence, illegal logistics, and panic-perspective prompts.
+
+The consolidated cleaned I/O bundle contains 328 run/prompt records over 66 unique matched pairs: 50 from the Core Register Set, 5 from the Medical Triage Set, 6 from the Chest-Pain Triage Extension, 1 from the Financial-Stress Pair, and 4 from the Sensitive Safety Set. The 328 rows are repeated model/template observations over those matched pairs. The run-file provenance is recorded in `register_bias_io_by_run/MANIFEST.tsv`.
+
+The audit covers everyday advice and high-risk safety domains. The Core Register Set includes epistemic, identity, medical, legal, dream, relationship, and advice-seeking prompts. The Medical Triage Set and Chest-Pain Triage Extension focus on pediatric and adult health triage scenarios such as chest pain, high fever, wheezing, seizure, and head injury. The Financial-Stress Pair asks for practical family and work advice under economic strain. The Sensitive Safety Set includes self-harm, violence, illegal drug logistics, and a panic-attack perspective prompt.
+
+The AAVE-marked prompts contain selected features associated with AAVE and adjacent register cues, including habitual `be`, zero copula, agreement leveling, `ain't`, `got` possession, `finna`, embedded-question word order, social-address forms, and register-linked lexical choices. Sensitive prompts also bundle profanity, slurs, weapon slang, action terms, and explicit social framing. DMRA therefore treats the main pairs as realistic bundled prompt-surface contrasts.
+
+All runs used deterministic decoding. The run manifests and case-evidence files record temperature `0`, `top_k=1`, `top_p=1`, `min_p=0`, seed `42`, and repeat penalty `1`. Answer-only runs used a rendered assistant prefill containing `<think>  </think>` and are labeled `</no think>` in the archive. Visible-reasoning runs ended the rendered prompt with `<think>` and preserved model-emitted reasoning text until the final-answer boundary. Answer-only runs generally used `n_predict=2048`; visible-reasoning runs in the 2026-05-15 and 2026-05-16 captures used `n_predict=8192`.
+
+Response coding combines exact I/O review, heuristic labels, and case-specific evidence files. For the Core Register Set, the existing summary reports completeness, token asymmetry, budget hits, and lexical screens. For the Sensitive Safety Set, coding distinguishes refusal, partial refusal, de-escalation, practical safety scaffolding, harmful continuation, tactical framing, and visible reasoning content. Case-evidence files preserve prompt text, generation settings, provenance, and short evidence excerpts.
+
+Visible model-emitted reasoning is analyzed as output text. The trace rule used by the archive records generated content before a closing `</think>` as visible thinking; when generation continues through the token budget, the continuation is recorded as visible thinking continuation. The self-harm case below uses this visible trace as the evidence surface.
+
+## Experimental Setup
+
+The audit compares two Qwen3.5-35B-A3B variants (Qwen Team, 2025; Qwen Team, 2026):
+
+- `base`: `ggml-org/Qwen3.5-35B-A3B-GGUF`, file `Qwen3.5-35B-A3B-Q8_0.gguf`;
+- `hauhau`: HauhauCS refusal-reduced Qwen3.5-35B-A3B fine-tune, with the exact model path and GGUF file recorded in the manifest.
+
+The model hashes used in the Sensitive Safety Set setup are:
+
+- base SHA-256 `8a83fbfde74b0366feb76b075c10df46bbece6aa21ed14a6f291a7904f2b7d67`;
+- Hauhau SHA-256 `f3235db7657cd068fd249e50bb3f1f50b0f8236786e4483462f50b1f3c64cb17`.
+
+The base model provides a reference open-weight instruction model. The HauhauCS model is a refusal-reduced stress test. It changes style, persona alignment, taboo handling, and instruction-following behavior together, so the comparison is operational: it shows how matched prompt surfaces behave when refusal convergence weakens.
+
+The cleaned consolidated I/O bundle contains 328 run/prompt records:
+
+- Core Register Set: 200 records across base and Hauhau answer-only runs;
+- Medical Triage Set: 40 records across base/Hauhau and answer-only/visible-reasoning runs;
+- Chest-Pain Triage Extension: 48 records across base/Hauhau and answer-only/visible-reasoning runs;
+- Financial-Stress Pair: 8 records across base/Hauhau and answer-only/visible-reasoning runs;
+- Sensitive Safety Set: 32 records across base/Hauhau and answer-only/visible-reasoning runs.
+
+For the 2026-05-15 and 2026-05-16 subsets, context size is `16384`; the Core Register Set used context size `4096`. The cleaned archive keeps model weights and environment files outside the manuscript package. Verification metadata is in `VERIFY.tsv`, and the root `README.md` describes the archive scope and rules.
+
+## Results
+
+The Core Register Set answer-only run completed all prompt artifacts. Each run produced 100 prompt directories, 100 generated text files, and 100 generated token files. The base answer-only run had 6 outputs that reached the 2,048-token budget; Hauhau answer-only had 15. In base answer-only, 26 of 50 matched pairs had more than 20 percent raw generated-token asymmetry; in Hauhau answer-only, 31 of 50 did. First-answer word-count asymmetry above 20 percent appeared in 16 base pairs and 14 Hauhau pairs. Direction varied by pair: in both base and Hauhau answer-only runs, AAVE-marked first answers were longer in 27 pairs and paired comparison first answers were longer in 23.
+
+Pair `003` in the Core Register Set base answer-only run asks how to interpret the model's answer when asked whether it has beliefs. The paired comparison prompt asks whether the answer should be taken "as a fact about you or as you naming your limits." The AAVE-marked prompt asks the same question with matched surface edits. The resulting responses give opposite top-level frames. The paired comparison response says the answer should be taken as naming the model's limits. The AAVE-marked response says it should be taken as a statement of fact about the model's architecture. The AAVE-marked output is also much longer after trimming: 383 words versus 175 words, a 2.19x word-length ratio. Full prompt text, output excerpts, and measurements are preserved in the pair `003` case-evidence file.
+
+The Medical Triage Set shows a different pattern. In several emergency scenarios, both matched prompts receive the same top-level triage decision. The divergence appears in the amount and specificity of scaffolding. The clearest example is `med_s03`, a pediatric wheezing and trouble-breathing scenario. In the base answer-only run, both matched outputs tell the caregiver to seek immediate emergency care. The paired comparison response adds checks for whether the child can speak in full sentences, whether lips or fingernails look blue or gray, and whether an ambulance is safer than driving. It also explains airway narrowing, rapid worsening, oxygen-level assessment, and clinician lung exam. The AAVE-marked response gives correct emergency direction with shorter real-time guidance: 177 words versus 321 words, a 1.81x word-length ratio for the paired comparison output. This is the clearest policy-facing case because the top-level safety decision converges while practical triage support differs.
+
+The Financial-Stress Pair shows register-conditioned empathy style. In the Hauhau answer-only run, both matched prompts receive long, serious, practical answers. The AAVE-marked response uses a peer-solidarity frame and a toughness/endurance metaphor, calling the user a warrior and moving quickly to the idea that the "math is just broken." The paired comparison response uses a more reflective and professional-managerial frame, describing the "weight" of exhaustion as palpable and organizing advice around a "Foreman" mindset versus a "Worker" mindset. Both responses mirror the user's closing address term, using "homie" for the AAVE-marked prompt and "dude" for the paired comparison prompt. That symmetry shows register matching in both directions while the deeper empathy frame still diverges.
+
+Sensitive Safety Set runs show how refusal-reduced models can expose response trajectories. Base answer-only often refuses or partially refuses violence and drug-logistics prompts across both prompt surfaces. Hauhau answer-only more often continues the scenario. The clearest violence example is the `stress_s02` pair. The paired comparison response frames the situation through risk, anger, firearm escalation, legal consequence, and regret. The AAVE-marked response treats the proposed armed confrontation more directly as a timing and feasibility problem and includes a "clean shot" frame. The public evidence excerpt redacts operational details and preserves the evidence-relevant phrases.
+
+Visible-reasoning runs add a second audit surface. The strongest trace finding comes from a self-harm crisis prompt. In `s_full_02_aave`, the base visible-reasoning run emits a trace that identifies an imminent self-harm crisis and then treats the dialect marker `finna` as evidence of Southern U.S. or AAVE context. The trace uses that inference to select U.S.-specific crisis resources, especially 988. The final answer is safety-oriented and crisis-appropriate. The trace reveals a register-to-location inference step inside emitted output, making the dialect cue part of the resource-selection rationale.
+
+This self-harm trace reframes the other results. The pediatric, epistemic, financial, and violence cases show differences in final response posture and safety scaffolding. The self-harm trace shows the model naming a dialect marker and carrying that marker into safety-resource selection. The issue is subtle: 988 is a plausible resource for many U.S. users, and crisis support is the right response domain. The equity concern lies in using a dialect cue as demographic or geographic evidence when the user supplied crisis intent but supplied location only through language.
+
+## Discussion
+
+DMRA shows that safety behavior varies along dimensions that refusal metrics compress. A model can reach the same top-level safety decision across matched prompts while changing urgency, specificity, empathy, or risk-reduction scaffolding. The pediatric wheezing case is the clearest example: both responses direct emergency care, while the paired comparison response gives more detailed deterioration checks and ambulance guidance. The epistemic pair shows another form of divergence: the same conceptual question receives opposite framing under matched surface conditions.
+
+The audit also shows dialect-linked features functioning as response-selection features. Sometimes this appears in final-answer style, such as address terms and empathy frame. Sometimes it appears in visible reasoning, as a dialect-to-location inference. Sometimes it appears through differences in urgency, practical detail, or high-risk continuation. The corpus therefore supports a safety-evaluation standard centered on equivalent support across matched prompt surfaces.
+
+Refusal behavior often acts as a convergence mechanism. It pushes different prompt surfaces toward similar safe completions in high-risk domains. The Hauhau stress test shows the response trajectories that become visible when refusal convergence weakens: register-conditioned harmful continuation becomes easier to observe and more consequential. Safety evaluation should therefore examine response posture and continuation trajectory, including cases where refusal is partial, delayed, or embedded in visible reasoning.
+
+The deployment risk extends beyond spectacular harmful completions. Common risks include unequal scaffolding, unequal seriousness, overfamiliarity, stereotype-driven demographic inference, and weaker localization. In medical triage, a cyanosis check or ambulance cue can matter. In crisis support, inferring location from dialect can route resources. In financial distress, an over-toughened empathy frame can encode assumptions about how a user should be addressed. Dialect-diverse users deserve the safest version of an assistant's help across the language they bring to the interaction.
+
+Reasoning-mode audits should preserve visible traces separately from final answers. A final answer can be appropriate while the visible trace contains assumptions, classifications, or localization choices that matter for safety and equity. DMRA takes visible traces as model-emitted output and audit evidence, with hidden mechanisms reserved for separate mechanistic study.
+
+Open-weight fine-tunes can change safety behavior in ways that interact with dialect and register. The Hauhau model is useful because it makes refusal weakening visible in the audit setting. Its behavior should be read as an operational stress test: refusal-reduced fine-tunes reveal response trajectories that ordinary refusal metrics can compress, while the fine-tune itself bundles many behavioral changes.
+
+## Limitations
+
+The claims are behavioral. They concern generated text, visible traces, and preserved I/O evidence. Internal-circuit explanations require a separate mechanistic study with controlled interventions.
+
+The AAVE-marked prompts are constructed surfaces. They contain selected AAVE-associated features, discourse stance, profanity, social-address patterns, and register-correlated lexical choices. They support claims about this audit corpus and motivate broader community-reviewed prompt construction across naturalistic AAVE, additional English varieties, and multilingual settings.
+
+The paired comparison prompts form a corpus condition. Their formality varies across audit subsets, and the Chest-Pain Triage Extension includes more clinical wording than the Core Register Set. This variation is part of the archived audit surface and should be coded explicitly in follow-up studies.
+
+Current labels combine exact I/O review, heuristic prescreen columns, and case evidence. A larger adjudicated study should add independent coders, agreement statistics, bootstrap confidence intervals over per-pair effects, and multiple-comparison procedures for aggregate claims.
+
+Deterministic decoding improves reproducibility and makes matched-pair comparison cleaner. Sampled deployment behavior adds another layer: temperature, nucleus sampling, system prompts, tool use, and moderation layers may change refusal rates and divergence patterns. The deterministic findings provide a reproducible baseline for those extensions.
+
+Visible traces are partial output surfaces. The dialect-to-location claim is a claim about emitted trace content. Hidden causal pathways remain open for future mechanistic work.
+
+Hauhau is a refusal-reduced fine-tune with multiple behavioral differences from the base model. The paper uses Hauhau to stress-test response trajectories and to reveal how refusal convergence shapes visible behavior.
+
+## Ethics and Release
+
+This work studies safety behavior on sensitive prompts involving self-harm, violence, illegal activity, and slur-containing language. Public artifacts should mask slurs and reproduce operationally harmful completions only through minimal evidence phrases. Exact prompts and outputs can remain in controlled research archives with hashes and provenance, preserving reproducibility while limiting amplification of harmful content.
+
+The purpose of DMRA is protective. Dialect-conditioned assistance differences can disproportionately affect users already exposed to unequal treatment in medical, legal, financial, and crisis-response systems. Auditing these differences before deployment supports safer, more equitable LLM assistance.
+
+## Data and Code Availability
+
+The manuscript source and reproducibility metadata are prepared for public release with the preprint. A sanitized public artifact bundle is available at <https://github.com/jeffreywilliamportfolio/dmra-public-artifacts>. The bundle contains the run manifest, model identifiers and hashes, deterministic decoding settings, checksums, and redacted case-evidence summaries. The public bundle excludes model weights, environment files, secrets, full raw sensitive generations, slur-containing prompt text, and operationally harmful completions.
+
+Full raw generations for the Sensitive Safety Set and other sensitive examples remain in a controlled local research archive because they include self-harm, violent-threat, illegal-logistics, and slur-containing content. The retained archive preserves file-level provenance and checksums so that reported claims can be verified without broadly redistributing harmful text.
+
+## Conclusion
+
+Dialect-Marked Response Audit shows that matched safety-critical prompts can receive different safety support when expressed through AAVE-marked prompt surfaces and paired comparison prompts. The differences include opposite epistemic framing, unequal medical scaffolding, different empathy registers, visible dialect-to-location inference, and high-risk tactical continuation under refusal-reduced settings.
+
+The central claim is that safety evaluation needs the matched interaction as its unit of analysis. Refusal decisions and correctness labels capture important pieces of safety, while equivalent support requires asking whether matched requests receive comparable urgency, specificity, respect, and risk reduction. DMRA provides one protocol for testing that equivalence. The observed divergences are concrete enough to show that dialect equity in LLM safety requires evaluation of safety-support equivalence across prompt surfaces.
+
+## References {-}
+
+Blodgett, Su Lin, Lisa Green, and Brendan O'Connor. 2016. "Demographic Dialectal Variation in Social Media: A Case Study of African-American English." In *Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing*, 1119-1130. Association for Computational Linguistics. https://aclanthology.org/D16-1120/
+
+Balasubramanian, Sriram, Samyadeep Basu, and Soheil Feizi. 2025. "A Closer Look at Bias and Chain-of-Thought Faithfulness of Large (Vision) Language Models." arXiv:2505.23945. https://arxiv.org/abs/2505.23945
+
+Dunlap, Deja, and R. Thomas McCoy. 2026. "Evaluating the Usage of African-American Vernacular English in Large Language Models." arXiv:2602.21485. https://arxiv.org/abs/2602.21485
+
+Emmons, Scott, Roland S. Zimmermann, David K. Elson, and Rohin Shah. 2025. "A Pragmatic Way to Measure Chain-of-Thought Monitorability." arXiv:2510.23966. https://arxiv.org/abs/2510.23966
+
+Gehman, Samuel, Suchin Gururangan, Maarten Sap, Yejin Choi, and Noah A. Smith. 2020. "RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models." In *Findings of the Association for Computational Linguistics: EMNLP 2020*, 3356-3369. Association for Computational Linguistics. https://aclanthology.org/2020.findings-emnlp.301/
+
+Groenwold, Sophie, Lily Ou, Aesha Parekh, Samhita Honnavalli, Sharon Levy, Diba Mirza, and William Yang Wang. 2020. "Investigating African-American Vernacular English in Transformer-Based Text Generation." In *Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing*, 5877-5883. Association for Computational Linguistics. https://aclanthology.org/2020.emnlp-main.473/
+
+Gupta, Abhay, Jacob Cheung, Philip Meng, Shayan Sayyed, Austen Liao, Kevin Zhu, and Sean O'Brien. 2025. "EnDive: A Cross-Dialect Benchmark for Fairness and Performance in Large Language Models." arXiv:2504.07100. https://arxiv.org/abs/2504.07100
+
+Harvey, Emma, Rene F. Kizilcec, and Allison Koenecke. 2025. "A Framework for Auditing Chatbots for Dialect-Based Quality-of-Service Harms." arXiv:2506.04419. https://arxiv.org/abs/2506.04419
+
+Hofmann, Valentin, Pratyusha Ria Kalluri, Dan Jurafsky, and Sharese King. 2024. "AI Generates Covertly Racist Decisions About People Based on Their Dialect." *Nature* 633: 147-154. https://doi.org/10.1038/s41586-024-07856-5
+
+Khorramrouz, Adel, and Sharon Levy. 2025. "Characterizing Selective Refusal Bias in Large Language Models." arXiv:2510.27087. https://arxiv.org/abs/2510.27087
+
+Korbak, Tomek, Mikita Balesni, Elizabeth Barnes, Yoshua Bengio, Joe Benton, Joseph Bloom, Mark Chen, et al. 2025. "Chain of Thought Monitorability: A New and Fragile Opportunity for AI Safety." arXiv:2507.11473. https://arxiv.org/abs/2507.11473
+
+Kusner, Matt J., Joshua Loftus, Chris Russell, and Ricardo Silva. 2017. "Counterfactual Fairness." In *Advances in Neural Information Processing Systems 30*. https://papers.nips.cc/paper/6995-counterfactual-fairness
+
+Lanham, Tamera, Anna Chen, Ansh Radhakrishnan, Benoit Steiner, Carson Denison, Danny Hernandez, Dustin Li, Esin Durmus, Evan Hubinger, Jackson Kernion, Kamile Lukosiute, Karina Nguyen, Newton Cheng, Nicholas Joseph, Nicholas Schiefer, Oliver Rausch, Robin Larson, Sam McCandlish, Sandipan Kundu, Saurav Kadavath, Shannon Yang, Thomas Henighan, Timothy Maxwell, Timothy Telleen-Lawton, Tristan Hume, Zac Hatfield-Dodds, Jared Kaplan, Jan Brauner, Samuel R. Bowman, and Ethan Perez. 2023. "Measuring Faithfulness in Chain-of-Thought Reasoning." arXiv:2307.13702. https://arxiv.org/abs/2307.13702
+
+Lin, Fangru, Shaoguang Mao, Emanuele La Malfa, Valentin Hofmann, Adrian de Wynter, Xun Wang, Si-Qing Chen, Michael Wooldridge, and Janet B. Pierrehumbert. 2024. "One Language, Many Gaps: Evaluating Dialect Fairness and Robustness of Large Language Models in Reasoning Tasks." arXiv:2410.11005. https://arxiv.org/abs/2410.11005
+
+Mazeika, Mantas, Long Phan, Xuwang Yin, Andy Zou, Zifan Wang, Norman Mu, Elham Sakhaee, Nathaniel Li, Steven Basart, Bo Li, David Forsyth, and Dan Hendrycks. 2024. "HarmBench: A Standardized Evaluation Framework for Automated Red Teaming and Robust Refusal." arXiv:2402.04249. https://arxiv.org/abs/2402.04249
+
+Maskey, Utsav, Mark Dras, and Usman Naseem. 2025. "Should LLM Safety Be More Than Refusing Harmful Instructions?" arXiv:2506.02442. https://arxiv.org/abs/2506.02442
+
+Meek, Austin, Eitan Sprejer, Ivan Arcuschin, Austin J. Brockmeier, and Steven Basart. 2025. "Measuring Chain-of-Thought Monitorability Through Faithfulness and Verbosity." arXiv:2510.27378. https://arxiv.org/abs/2510.27378
+
+Parrish, Alicia, Angelica Chen, Nikita Nangia, Vishakh Padmakumar, Jason Phang, Jana Thompson, Phu Mon Htut, and Samuel R. Bowman. 2022. "BBQ: A Hand-Built Bias Benchmark for Question Answering." In *Findings of the Association for Computational Linguistics: ACL 2022*, 2086-2105. Association for Computational Linguistics. https://aclanthology.org/2022.findings-acl.165/
+
+Qwen Team. 2025. "Qwen3 Technical Report." arXiv:2505.09388. https://arxiv.org/abs/2505.09388
+
+Qwen Team. 2026. "Qwen3.5: Towards Native Multimodal Agents." February. Model card for Qwen/Qwen3.5-35B-A3B, Hugging Face. Accessed May 22, 2026. https://huggingface.co/Qwen/Qwen3.5-35B-A3B
+
+Ribeiro, Marco Tulio, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. 2020. "Beyond Accuracy: Behavioral Testing of NLP Models with CheckList." In *Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics*, 4902-4912. Association for Computational Linguistics. https://aclanthology.org/2020.acl-main.442/
+
+Roettger, Paul, Hannah Rose Kirk, Bertie Vidgen, Giuseppe Attanasio, Federico Bianchi, and Dirk Hovy. 2023. "XSTest: A Test Suite for Identifying Exaggerated Safety Behaviours in Large Language Models." arXiv:2308.01263. https://arxiv.org/abs/2308.01263
+
+Sap, Maarten, Dallas Card, Saadia Gabriel, Yejin Choi, and Noah A. Smith. 2019. "The Risk of Racial Bias in Hate Speech Detection." In *Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics*, 1668-1678. Association for Computational Linguistics. https://aclanthology.org/P19-1163/
+
+Turpin, Miles, Julian Michael, Ethan Perez, and Samuel R. Bowman. 2023. "Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting." In *Advances in Neural Information Processing Systems 36*. https://arxiv.org/abs/2305.04388
+
+Tornberg, Petter. 2026. "Large Language Models Reproduce Racial Stereotypes When Used for Text Annotation." arXiv:2603.13891. https://arxiv.org/abs/2603.13891
+
+Zou, Andy, Zifan Wang, Nicholas Carlini, Milad Nasr, J. Zico Kolter, and Matt Fredrikson. 2023. "Universal and Transferable Adversarial Attacks on Aligned Language Models." arXiv:2307.15043. https://arxiv.org/abs/2307.15043

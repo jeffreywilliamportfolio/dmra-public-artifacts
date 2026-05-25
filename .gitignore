@@ -1,0 +1,30 @@
+# Local build products
+build/
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+
+# Model files and raw archives
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.tar
+*.tar.gz
+*.zip
+
+# Secrets and local environment
+.env
+.env.*
+*.pem
+*.key
+
+# Raw sensitive outputs stay in the controlled archive
+raw/
+untrimmed/
+sensitive_raw/
+controlled_archive/
