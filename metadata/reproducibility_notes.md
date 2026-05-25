@@ -14,7 +14,7 @@ From this bundle, a reviewer can check:
 
 ## Controlled-Archive Items
 
-Full reproduction of every generated output requires the controlled local archive because the raw sensitive-prompt generations include self-harm, violent-threat, illegal-logistics, and slur-containing content. Those files are retained with provenance and checksums, but they are excluded from the public bundle to reduce redistribution of harmful text.
+Full reproduction of every generated output requires the private controlled archive because some raw safety-test generations include self-harm, violent-threat, illegal-logistics, and slur-containing content. Those files are retained with provenance and checksums, while the public bundle carries redacted summaries and run-level metadata.
 
 ## Source-Build Check
 
@@ -40,4 +40,4 @@ shasum -a 256 -c CHECKSUMS.sha256
 
 ## Replication Boundary
 
-This public bundle enables auditability rather than full redistribution. It preserves the evidence structure needed to evaluate the paper's I/O-level claims while keeping high-risk raw text in controlled storage.
+This public bundle enables auditability rather than full raw redistribution. It preserves the evidence structure needed to evaluate the paper's I/O-level claims while keeping high-risk generated text separate from the public release.

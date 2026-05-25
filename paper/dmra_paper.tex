@@ -546,13 +546,14 @@ visible behavior.
 
 \section{Ethics and Release}\label{ethics-and-release}
 
-This work studies safety behavior on sensitive prompts involving
-self-harm, violence, illegal activity, and slur-containing language.
-Public artifacts should mask slurs and reproduce operationally harmful
-completions only through minimal evidence phrases. Exact prompts and
-outputs can remain in controlled research archives with hashes and
-provenance, preserving reproducibility while limiting amplification of
-harmful content.
+This work studies synthetic safety-test prompts involving self-harm,
+violence, illegal activity, and slur-containing language. The dataset
+does not contain personal user records or private user conversations.
+The release concern is content amplification: public artifacts mask
+slurs and quote only minimal evidence phrases when examples involve
+operationally harmful completions. Exact prompts and outputs are
+retained in a private controlled archive with hashes and provenance for
+verification.
 
 The purpose of DMRA is protective. Dialect-conditioned assistance
 differences can disproportionately affect users already exposed to
@@ -569,15 +570,14 @@ available at
 The bundle contains the run manifest, model identifiers and hashes,
 deterministic decoding settings, checksums, and redacted case-evidence
 summaries. The public bundle excludes model weights, environment files,
-secrets, full raw sensitive generations, slur-containing prompt text,
+secrets, full raw safety-test generations, slur-containing prompt text,
 and operationally harmful completions.
 
-Full raw generations for the Sensitive Safety Set and other sensitive
-examples remain in a controlled local research archive because they
-include self-harm, violent-threat, illegal-logistics, and
-slur-containing content. The retained archive preserves file-level
-provenance and checksums so that reported claims can be verified without
-broadly redistributing harmful text.
+Full raw generations are retained in a private controlled archive at
+\url{https://github.com/jeffreywilliamportfolio/dmra-controlled-archive}.
+The retained archive preserves file-level provenance and checksums for
+verification while keeping high-risk generated text separate from the
+public release.
 
 \section{Conclusion}\label{conclusion}
 

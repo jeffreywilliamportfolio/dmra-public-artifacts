@@ -19,8 +19,8 @@ Prepared: 2026-05-25
 
 ## Safety Scope
 
-This public bundle intentionally excludes model weights, `.env` files, secrets, raw sensitive-prompt generations, slur-containing prompt text, and operationally harmful completions. Full raw generations remain in the controlled local research archive. The public bundle preserves enough provenance, hashes, and redacted evidence summaries to audit the reported claims without broadly redistributing harmful text.
+This public bundle intentionally excludes model weights, `.env` files, secrets, full raw safety-test generations, slur-containing prompt text, and operationally harmful completions. Full raw generations remain in a private controlled archive. The public bundle preserves enough provenance, hashes, and redacted evidence summaries to audit the reported claims while keeping high-risk generated text separate from the public release.
 
 ## Intended Use
 
-This artifact is intended for reproducing the paper's I/O-level audit framing, checking run provenance, verifying deterministic settings, and reviewing redacted claim evidence. It is not a benchmark release, a model release, or a complete redistribution of the raw sensitive corpus.
+This artifact is intended for reproducing the paper's I/O-level audit framing, checking run provenance, verifying deterministic settings, and reviewing redacted claim evidence. It is not a benchmark release, a model release, or a complete redistribution of the raw safety-test corpus.

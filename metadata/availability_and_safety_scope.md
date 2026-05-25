@@ -17,14 +17,14 @@ The public bundle excludes:
 
 - model weights and `.gguf` files;
 - `.env`, `.env.*`, API keys, tokens, and credentials;
-- raw sensitive-prompt generations;
+- full raw safety-test generations;
 - full slur-containing prompt text;
 - operationally harmful violent or illegal-logistics completions;
-- untrimmed run files and source archives containing raw sensitive content.
+- untrimmed run files and source archives containing high-risk safety-test content.
 
 ## Controlled Archive
 
-The full local archive retains raw generations, untrimmed outputs, and exact sensitive-prompt artifacts for controlled research verification. The public bundle is designed to preserve provenance and claim auditability while reducing redistribution of harmful text.
+The private controlled archive retains raw generations, untrimmed outputs, and exact safety-test prompt artifacts for verification. The public bundle is designed to preserve provenance and claim auditability while keeping high-risk generated text separate from the public release.
 
 ## License Note
 
