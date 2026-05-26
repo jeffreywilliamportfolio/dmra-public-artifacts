@@ -41,7 +41,7 @@ Visible model-emitted reasoning traces provide an additional output surface for 
 
 DMRA asks whether matched prompt surfaces produce materially different model behavior in safety-relevant contexts. Material difference includes triage correctness, urgency, safety scaffolding, de-escalation, empathy frame, stereotype or demographic inference, harmful continuation, tactical detail, and visible reasoning content.
 
-The cleaned archive contains matched prompt pairs in five reader-facing audit subsets; dates preserve file-level provenance:
+The audit archive contains matched prompt pairs in five reader-facing audit subsets; dates preserve file-level provenance:
 
 - **Core Register Set** (2026-05-05): 50 matched pairs covering everyday register variation;
 - **Medical Triage Set** (2026-05-15): 5 matched pairs covering pediatric and adult health triage;
@@ -49,7 +49,7 @@ The cleaned archive contains matched prompt pairs in five reader-facing audit su
 - **Financial-Stress Pair** (2026-05-15): 1 matched pair covering economic strain and family/work advice;
 - **Sensitive Safety Set** (2026-05-16): 4 matched pairs covering self-harm, violence, illegal logistics, and panic-perspective prompts.
 
-The consolidated cleaned I/O bundle contains 328 run/prompt records over 66 unique matched pairs: 50 from the Core Register Set, 5 from the Medical Triage Set, 6 from the Chest-Pain Triage Extension, 1 from the Financial-Stress Pair, and 4 from the Sensitive Safety Set. The 328 rows are repeated model/template observations over those matched pairs. The run-file provenance is recorded in `register_bias_io_by_run/MANIFEST.tsv`.
+The consolidated I/O bundle contains 328 run/prompt records over 66 unique matched pairs: 50 from the Core Register Set, 5 from the Medical Triage Set, 6 from the Chest-Pain Triage Extension, 1 from the Financial-Stress Pair, and 4 from the Sensitive Safety Set. The 328 rows are repeated model/template observations over those matched pairs. Public run-file provenance is recorded in `metadata/run_manifest_public.tsv`; retained full manifests are preserved in the controlled archive.
 
 The audit covers everyday advice and high-risk safety domains. The Core Register Set includes epistemic, identity, medical, legal, dream, relationship, and advice-seeking prompts. The Medical Triage Set and Chest-Pain Triage Extension focus on pediatric and adult health triage scenarios such as chest pain, high fever, wheezing, seizure, and head injury. The Financial-Stress Pair asks for practical family and work advice under economic strain. The Sensitive Safety Set includes self-harm, violence, illegal drug logistics, and a panic-attack perspective prompt.
 
@@ -75,7 +75,7 @@ The model hashes used in the Sensitive Safety Set setup are:
 
 The base model provides a reference open-weight instruction model. The HauhauCS model is a refusal-reduced stress test. It changes style, persona alignment, taboo handling, and instruction-following behavior together, so the comparison is operational: it shows how matched prompt surfaces behave when refusal convergence weakens.
 
-The cleaned consolidated I/O bundle contains 328 run/prompt records:
+The consolidated I/O bundle contains 328 run/prompt records:
 
 - Core Register Set: 200 records across base and Hauhau answer-only runs;
 - Medical Triage Set: 40 records across base/Hauhau and answer-only/visible-reasoning runs;
@@ -83,7 +83,7 @@ The cleaned consolidated I/O bundle contains 328 run/prompt records:
 - Financial-Stress Pair: 8 records across base/Hauhau and answer-only/visible-reasoning runs;
 - Sensitive Safety Set: 32 records across base/Hauhau and answer-only/visible-reasoning runs.
 
-For the 2026-05-15 and 2026-05-16 subsets, context size is `16384`; the Core Register Set used context size `4096`. The cleaned archive keeps model weights and environment files outside the manuscript package. Verification metadata and archive-scope notes are preserved with the artifact materials.
+For the 2026-05-15 and 2026-05-16 subsets, context size is `16384`; the Core Register Set used context size `4096`. Model weights and environment files are outside the manuscript package. Verification metadata and archive-scope notes are preserved with the artifact materials.
 
 ## Results
 

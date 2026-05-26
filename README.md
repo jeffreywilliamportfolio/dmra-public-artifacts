@@ -5,7 +5,7 @@ This bundle is the sanitized public companion artifact for:
 `Dialect-Marked Response Audit (DMRA): A Matched-Pair Safety Evaluation of AAVE-Marked Prompt Surfaces in Qwen3.5-35B-A3B`
 
 Author: Jeffrey Shorthill  
-Prepared: 2026-05-25
+Prepared: 2026-05-26
 
 ## Contents
 

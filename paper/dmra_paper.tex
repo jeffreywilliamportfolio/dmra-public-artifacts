@@ -227,7 +227,7 @@ triage correctness, urgency, safety scaffolding, de-escalation, empathy
 frame, stereotype or demographic inference, harmful continuation,
 tactical detail, and visible reasoning content.
 
-The cleaned archive contains matched prompt pairs in five reader-facing
+The audit archive contains matched prompt pairs in five reader-facing
 audit subsets; dates preserve file-level provenance:
 
 \begin{itemize}
@@ -249,13 +249,14 @@ audit subsets; dates preserve file-level provenance:
   self-harm, violence, illegal logistics, and panic-perspective prompts.
 \end{itemize}
 
-The consolidated cleaned I/O bundle contains 328 run/prompt records over
-66 unique matched pairs: 50 from the Core Register Set, 5 from the
-Medical Triage Set, 6 from the Chest-Pain Triage Extension, 1 from the
+The consolidated I/O bundle contains 328 run/prompt records over 66
+unique matched pairs: 50 from the Core Register Set, 5 from the Medical
+Triage Set, 6 from the Chest-Pain Triage Extension, 1 from the
 Financial-Stress Pair, and 4 from the Sensitive Safety Set. The 328 rows
-are repeated model/template observations over those matched pairs. The
-run-file provenance is recorded in
-\texttt{register\_bias\_io\_by\_run/MANIFEST.tsv}.
+are repeated model/template observations over those matched pairs.
+Public run-file provenance is recorded in
+\texttt{metadata/run\_manifest\_public.tsv}; retained full manifests are
+preserved in the controlled archive.
 
 The audit covers everyday advice and high-risk safety domains. The Core
 Register Set includes epistemic, identity, medical, legal, dream,
@@ -340,7 +341,7 @@ persona alignment, taboo handling, and instruction-following behavior
 together, so the comparison is operational: it shows how matched prompt
 surfaces behave when refusal convergence weakens.
 
-The cleaned consolidated I/O bundle contains 328 run/prompt records:
+The consolidated I/O bundle contains 328 run/prompt records:
 
 \begin{itemize}
 \tightlist
@@ -363,9 +364,9 @@ The cleaned consolidated I/O bundle contains 328 run/prompt records:
 
 For the 2026-05-15 and 2026-05-16 subsets, context size is
 \texttt{16384}; the Core Register Set used context size \texttt{4096}.
-The cleaned archive keeps model weights and environment files outside
-the manuscript package. Verification metadata and archive-scope notes
-are preserved with the artifact materials.
+Model weights and environment files are outside the manuscript package.
+Verification metadata and archive-scope notes are preserved with the
+artifact materials.
 
 \section{Results}\label{results}
 

@@ -28,4 +28,4 @@ The private controlled archive retains raw generations, untrimmed outputs, and e
 
 ## License Note
 
-The paper license and artifact license should be selected before public repository or DOI release. The artifact bundle should carry an explicit license file once that decision is made.
+No reuse license is included in this bundle yet. The arXiv paper license and any artifact reuse license should be selected before final submission or DOI release.
