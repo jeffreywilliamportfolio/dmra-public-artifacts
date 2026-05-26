@@ -28,4 +28,4 @@ The private controlled archive retains raw generations, untrimmed outputs, and e
 
 ## License Note
 
-No reuse license is included in this bundle yet. The arXiv paper license and any artifact reuse license should be selected before final submission or DOI release.
+The paper source, public metadata, and redacted public summaries in this bundle are released under Creative Commons Attribution 4.0 International (CC BY 4.0). The controlled archive has no public reuse license.

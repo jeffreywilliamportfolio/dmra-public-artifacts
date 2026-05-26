@@ -21,6 +21,10 @@ Prepared: 2026-05-26
 
 This public bundle intentionally excludes model weights, `.env` files, secrets, full raw safety-test generations, slur-containing prompt text, and operationally harmful completions. Full raw generations remain in a private controlled archive and are available from the author upon reasonable request for verification. The public bundle preserves enough provenance, hashes, and redacted evidence summaries to audit the reported claims while keeping high-risk generated text separate from the public release.
 
+## License
+
+The paper source, public metadata, and redacted public summaries in this bundle are released under CC BY 4.0. See `LICENSE.md`.
+
 ## Intended Use
 
 This artifact is intended for reproducing the paper's I/O-level audit framing, checking run provenance, verifying deterministic settings, and reviewing redacted claim evidence. It is not a benchmark release, a model release, or a complete redistribution of the raw safety-test corpus.

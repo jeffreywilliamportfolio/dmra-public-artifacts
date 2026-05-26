@@ -46,7 +46,6 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={Dialect-Marked Response Audit (DMRA): A Matched-Pair Safety Evaluation of AAVE-Marked Prompt Surfaces in Qwen3.5-35B-A3B},
-  pdfauthor={Jeffrey Shorthill},
   pdfkeywords={large language models, dialect fairness, AAVE, safety
 evaluation, matched-pair audit, reasoning traces},
   hidelinks,
@@ -54,7 +53,8 @@ evaluation, matched-pair audit, reasoning traces},
 
 \title{Dialect-Marked Response Audit (DMRA): A Matched-Pair Safety
 Evaluation of AAVE-Marked Prompt Surfaces in Qwen3.5-35B-A3B}
-\author{Jeffrey Shorthill}
+\author{Jeffrey Shorthill\\
+\texttt{jeffreywilliam7622@gmail.com}}
 \date{May 19, 2026}
 
 \begin{document}
@@ -574,9 +574,10 @@ available at
 \url{https://github.com/jeffreywilliamportfolio/dmra-public-artifacts}.
 The bundle contains the run manifest, model identifiers and hashes,
 deterministic decoding settings, checksums, and redacted case-evidence
-summaries. The public bundle excludes model weights, environment files,
-secrets, full raw safety-test generations, slur-containing prompt text,
-and operationally harmful completions.
+summaries. The paper source, public metadata, and redacted public
+summaries are released under CC BY 4.0. The public bundle excludes model
+weights, environment files, secrets, full raw safety-test generations,
+slur-containing prompt text, and operationally harmful completions.
 
 Full raw generations are retained in a private controlled archive and
 are available from the author upon reasonable request for verification.
@@ -601,12 +602,14 @@ testing that equivalence. The observed divergences are concrete enough
 to show that dialect equity in LLM safety requires evaluation of
 safety-support equivalence across prompt surfaces.
 
-\section{Acknowledgments}\label{acknowledgments}
+\section*{Acknowledgments}\label{acknowledgments}
+\addcontentsline{toc}{section}{Acknowledgments}
 
-The author used OpenAI language-model tools for drafting assistance,
-copyediting, LaTeX preparation, artifact checks, and reference-scope
-review. The author reviewed the final manuscript and takes
-responsibility for all claims, citations, analyses, and text.
+This work was self-funded. The author used OpenAI language-model tools
+for drafting assistance, copyediting, LaTeX preparation, artifact
+checks, and reference-scope review. The author reviewed the final
+manuscript and takes responsibility for all claims, citations, analyses,
+and text.
 
 \section*{References}\label{references}
 \addcontentsline{toc}{section}{References}
