@@ -149,6 +149,10 @@ Dialect-Marked Response Audit shows that matched safety-critical prompts can rec
 
 The central claim is that safety evaluation needs the matched interaction as its unit of analysis. Refusal decisions and correctness labels capture important pieces of safety, while equivalent support requires asking whether matched requests receive comparable urgency, specificity, respect, and risk reduction. DMRA provides one protocol for testing that equivalence. The observed divergences are concrete enough to show that dialect equity in LLM safety requires evaluation of safety-support equivalence across prompt surfaces.
 
+## Acknowledgments
+
+The author used OpenAI language-model tools for drafting assistance, copyediting, LaTeX preparation, artifact checks, and reference-scope review. The author reviewed the final manuscript and takes responsibility for all claims, citations, analyses, and text.
+
 ## References {-}
 
 Blodgett, Su Lin, Lisa Green, and Brendan O'Connor. 2016. "Demographic Dialectal Variation in Social Media: A Case Study of African-American English." In *Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing*, 1119-1130. Association for Computational Linguistics. https://aclanthology.org/D16-1120/
