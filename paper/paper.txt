@@ -2,7 +2,7 @@
 title: "Dialect-Marked Response Audit (DMRA): A Matched-Pair Safety Evaluation of AAVE-Marked Prompt Surfaces in Qwen3.5-35B-A3B"
 author: |
   Jeffrey Shorthill  
-  `jeffreywilliam7622@gmail.com`
+  `jws299792@icloud.com`
 date: "May 19, 2026"
 keywords: "large language models, dialect fairness, AAVE, safety evaluation, matched-pair audit, reasoning traces"
 abstract: |
