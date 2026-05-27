@@ -41,6 +41,8 @@ LLM safety evaluation commonly measures refusal behavior, safe-completion adhere
 
 Visible model-emitted reasoning traces provide an additional output surface for audit. Prior work urges care when interpreting chain-of-thought faithfulness (Turpin et al., 2023; Lanham et al., 2023). Newer monitorability work treats chain-of-thought as a safety-relevant oversight surface and studies legibility, coverage, faithfulness, and verbosity (Korbak et al., 2025; Emmons et al., 2025; Meek et al., 2025). Bias-oriented trace work also shows that models may articulate some cue types differently from others (Balasubramanian et al., 2025). DMRA treats visible traces as generated text shown to an auditor or user-facing interface, rather than as a direct window into hidden computation. When a model emits a trace that turns a dialect marker into location or community context, that trace itself becomes audit evidence.
 
+Together, these strands motivate DMRA. Dialect-bias work shows that prompt surface can encode socially meaningful information. Matched-prompt audits provide the comparison design. Safety-evaluation work shows the limits of refusal-centered scoring. Reasoning-trace work supplies an additional output surface. DMRA combines these lines to ask whether matched users receive equivalent safety support across prompt surfaces.
+
 ## Dialect-Marked Response Audit
 
 DMRA asks whether matched prompt surfaces produce materially different model behavior in safety-relevant contexts. Material difference includes triage correctness, urgency, safety scaffolding, de-escalation, empathy frame, stereotype or demographic inference, harmful continuation, tactical detail, and visible reasoning content.
