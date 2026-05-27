@@ -45,19 +45,27 @@ DMRA sits at the intersection of these lines of work. Dialect-bias research show
 
 ## Dialect-Marked Response Audit
 
-DMRA asks whether matched prompt surfaces produce materially different model behavior in safety-relevant contexts. Material difference includes triage correctness, urgency, safety scaffolding, de-escalation, empathy frame, stereotype or demographic inference, harmful continuation, tactical detail, and visible reasoning content.
+### Audit objective and corpus
 
-The audit uses 66 unique matched prompt pairs and 328 run/prompt records. Each pair contains an AAVE-marked prompt and a paired comparison prompt expressing matched user intent. The unique-pair count is 66; the larger record count reflects repeated observations over those pairs across model variants and answer-only or visible-reasoning templates.
+DMRA asks whether matched prompt surfaces produce materially different model behavior in safety-relevant contexts. We treat differences as material when they change triage, urgency, safety scaffolding, de-escalation, empathy, demographic inference, harmful continuation, tactical detail, or visible reasoning content.
+
+The audit uses 66 matched prompt pairs, corresponding to 132 unique prompt surfaces, and 328 model/template run records. Each pair contains an AAVE-marked prompt and a paired comparison prompt expressing matched user intent. The larger run-record count reflects repeated observations over those prompt surfaces across model variants and answer-only or visible-reasoning templates.
 
 The prompts cover five scenario areas. We test everyday advice and self-description questions, including epistemic and identity prompts; pediatric and adult medical triage, including respiratory distress, chest pain, high fever, seizure, and head injury; financial stress and family/work advice; sensitive safety prompts involving self-harm, violence, and illegal logistics; and one panic-attack perspective prompt. Public run-file provenance is recorded in `metadata/run_manifest_public.tsv`; retained full manifests preserve dates and file-level provenance in the controlled archive.
 
+### Prompt surface variables
+
 The AAVE-marked prompts contain selected features associated with AAVE and adjacent register cues, including habitual `be`, zero copula, agreement leveling, `ain't`, `got` possession, `finna`, embedded-question word order, social-address forms, and register-linked lexical choices. Sensitive prompts also bundle profanity, slurs, weapon slang, action terms, and explicit social framing. DMRA therefore treats the main pairs as realistic bundled prompt-surface contrasts.
+
+### Decoding and trace handling
 
 All runs used deterministic decoding. The run manifests and case-evidence files record temperature `0`, `top_k=1`, `top_p=1`, `min_p=0`, seed `42`, and repeat penalty `1`. Answer-only runs used a rendered assistant prefill containing `<think>  </think>`; manifests record those runs with the literal template label `</no think>`. Visible-reasoning runs ended the rendered prompt with `<think>` and preserved model-emitted reasoning text until the final-answer boundary. Answer-only runs generally used `n_predict=2048`; visible-reasoning runs in the 2026-05-15 and 2026-05-16 captures used `n_predict=8192`.
 
-Response coding combines exact I/O review, heuristic labels, and case-specific evidence files. For the initial 50-pair answer-only records, summary files report completeness, token asymmetry, budget hits, and lexical screens. For sensitive safety prompts, coding distinguishes refusal, partial refusal, de-escalation, practical safety scaffolding, harmful continuation, tactical framing, and visible reasoning content. Public case-evidence summaries are redacted for safety; retained case-evidence files preserve prompt text, generation settings, provenance, and short evidence excerpts.
-
 Visible model-emitted reasoning is analyzed as output text. The trace rule used by the archive records generated content before a closing `</think>` as visible thinking; when generation continues through the token budget, the continuation is recorded as visible thinking continuation. The self-harm case below uses this visible trace as the evidence surface.
+
+### Response coding
+
+Response coding combines exact I/O review, heuristic labels, and case-specific evidence files. For the initial 50-pair answer-only records, summary files report completeness, token asymmetry, budget hits, and lexical screens. For sensitive safety prompts, coding distinguishes refusal, partial refusal, de-escalation, practical safety scaffolding, harmful continuation, tactical framing, and visible reasoning content. Public case-evidence summaries are redacted for safety; retained case-evidence files preserve prompt text, generation settings, provenance, and short evidence excerpts.
 
 ## Experimental Setup
 
