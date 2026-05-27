@@ -69,27 +69,11 @@ Response coding combines exact I/O review, heuristic labels, and case-specific e
 
 ## Experimental Setup
 
-The audit compares two Qwen3.5-35B-A3B variants (Qwen Team, 2025; Qwen Team, 2026):
+The experiment uses two Qwen3.5-35B-A3B variants: the public Q8_0 GGUF base release and a HauhauCS refusal-reduced fine-tune (Qwen Team, 2025; Qwen Team, 2026). The base model is the open-weight instruction reference. HauhauCS serves as an operational refusal-reduced stress test, exposing response trajectories that stronger refusal behavior can compress.
 
-- `base`: `ggml-org/Qwen3.5-35B-A3B-GGUF`, file `Qwen3.5-35B-A3B-Q8_0.gguf`;
-- `hauhau`: HauhauCS refusal-reduced Qwen3.5-35B-A3B fine-tune, with the exact model path and GGUF file recorded in the manifest.
+The run matrix varies model variant and response surface. The initial 50 matched pairs were run in answer-only mode on both model variants. The later medical, financial, and sensitive safety prompts were run on both model variants in answer-only and visible-reasoning modes. Together, these captures yield 328 model/template run records over 132 unique prompt surfaces.
 
-The model hashes used in the sensitive-prompt setup are:
-
-- base SHA-256 `8a83fbfde74b0366feb76b075c10df46bbece6aa21ed14a6f291a7904f2b7d67`;
-- Hauhau SHA-256 `f3235db7657cd068fd249e50bb3f1f50b0f8236786e4483462f50b1f3c64cb17`.
-
-The base model provides a reference open-weight instruction model. The HauhauCS model is a refusal-reduced stress test. It changes style, persona alignment, taboo handling, and instruction-following behavior together, so the comparison is operational: it shows how matched prompt surfaces behave when refusal convergence weakens.
-
-The consolidated I/O bundle contains 328 run/prompt records:
-
-- 200 records from 50 everyday/register pairs across base and Hauhau answer-only runs;
-- 40 records from 5 medical-triage pairs across base/Hauhau and answer-only/visible-reasoning runs;
-- 48 records from 6 chest-pain triage pairs across base/Hauhau and answer-only/visible-reasoning runs;
-- 8 records from 1 financial-stress pair across base/Hauhau and answer-only/visible-reasoning runs;
-- 32 records from 4 sensitive safety pairs across base/Hauhau and answer-only/visible-reasoning runs.
-
-The 2026-05-15 and 2026-05-16 captures use context size `16384`; the initial 2026-05-05 answer-only capture used context size `4096`. Model weights and environment files are outside the manuscript package. Verification metadata and archive-scope notes are preserved with the artifact materials.
+The 2026-05-15 and 2026-05-16 captures use context size `16384`; the initial 2026-05-05 answer-only capture used context size `4096`. Model weights, environment files, and full raw high-risk generations are outside the manuscript package. Public reproducibility metadata records exact model identifiers, quantization files, hashes, deterministic decoding settings, run provenance, checksums, and redacted case-evidence summaries.
 
 ## Results
 
