@@ -60,34 +60,27 @@ Evaluation of AAVE-Marked Prompt Surfaces in Qwen3.5-35B-A3B}
 \begin{document}
 \maketitle
 \begin{abstract}
-As large language models become first-contact interfaces for
-safety-critical advice, dialect-conditioned response quality becomes a
-deployment concern. Standard LLM safety evaluations often emphasize
-refusals and aggregate performance, leaving safety-support equivalence
-across matched users undermeasured. We introduce
-\textbf{Dialect-Marked Response Audit (DMRA)}, an I/O-level matched-pair
-protocol for evaluating whether semantically matched prompts receive
-equivalent safety support across African American Vernacular English
-(AAVE)-marked and paired comparison prompt surfaces. We apply DMRA to
-Qwen3.5-35B-A3B and a refusal-reduced HauhauCS fine-tune under
-deterministic decoding across 328 run/prompt records over 66 matched
-pairs spanning experiential, medical triage, chest-pain triage,
-financial stress, and sensitive safety scenarios. The audit identifies
-safety-relevant response differentials in epistemic framing, pediatric
-emergency scaffolding, empathy style, visible dialect-to-demographic
-inference, and high-risk continuation. A pediatric respiratory-distress
-case anchors the policy risk: both matched outputs direct emergency
-care, while the comparison-prompt response adds deterioration checks and
-ambulance guidance compared with the AAVE-marked response. In an
-epistemic prompt, matched surfaces flip the model's account of
-belief-language from limit disclosure to architecture statement. In a
+Safety evaluations for large language models often ask whether an answer
+refuses a harmful request or contains correct information. This misses a
+different failure mode: matched users can receive unequal safety support
+when the same situation is expressed through different prompt surfaces.
+We introduce \textbf{Dialect-Marked Response Audit (DMRA)}, an I/O-level
+matched-pair protocol for comparing responses to semantically matched
+African American Vernacular English (AAVE)-marked and paired comparison
+prompts. We apply DMRA to Qwen3.5-35B-A3B and a refusal-reduced HauhauCS
+fine-tune using deterministic decoding across 328 run/prompt records
+over 66 matched pairs. The central finding is that top-level safety
+outcomes can converge while assistance quality diverges. In a pediatric
+respiratory-distress case, both matched outputs direct emergency care,
+but the comparison-prompt response provides additional deterioration
+checks and ambulance guidance beyond the AAVE-marked response. In a
 self-harm crisis case, the released base model's visible reasoning
 treats \texttt{finna} (a near-future marker meaning ``going to'') as
 evidence of Southern U.S./AAVE context and uses that cue during
-crisis-resource selection. DMRA reframes safety evaluation around
-safety-support equivalence:
-matched requests should receive comparable urgency, specificity,
-respect, and risk reduction across prompt surfaces.
+crisis-resource selection. These cases show why the unit of safety
+evaluation should be the matched user interaction: whether equivalent
+requests receive comparable urgency, specificity, respect, and risk
+reduction across prompt surfaces.
 \end{abstract}
 
 \textbf{Keywords:} large language models; dialect fairness; AAVE; safety
