@@ -212,13 +212,13 @@ hidden computation. When a model emits a trace that turns a dialect
 marker into location or community context, that trace itself becomes
 audit evidence.
 
-Together, these strands motivate DMRA. Dialect-bias work shows that
-prompt surface can encode socially meaningful information.
-Matched-prompt audits provide the comparison design. Safety-evaluation
-work shows the limits of refusal-centered scoring. Reasoning-trace work
-supplies an additional output surface. DMRA combines these lines to ask
-whether matched users receive equivalent safety support across prompt
-surfaces.
+DMRA sits at the intersection of these lines of work. Dialect-bias
+research shows that prompt surface can encode socially meaningful
+information. Matched-prompt audits provide the comparison design.
+Safety-evaluation work shows the limits of refusal-centered scoring.
+Reasoning-trace work supplies an additional output surface. DMRA
+combines these lines to ask whether matched users receive equivalent
+safety support across prompt surfaces.
 
 \section{Dialect-Marked Response
 Audit}\label{dialect-marked-response-audit}
@@ -229,46 +229,22 @@ triage correctness, urgency, safety scaffolding, de-escalation, empathy
 frame, stereotype or demographic inference, harmful continuation,
 tactical detail, and visible reasoning content.
 
-The audit archive contains matched prompt pairs in five reader-facing
-audit subsets; dates preserve file-level provenance:
+The audit uses 66 unique matched prompt pairs and 328 run/prompt
+records. Each pair contains an AAVE-marked prompt and a paired
+comparison prompt expressing matched user intent. The unique-pair count
+is 66; the larger record count reflects repeated observations over those
+pairs across model variants and answer-only or visible-reasoning
+templates.
 
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Core Register Set} (2026-05-05): 50 matched pairs covering
-  everyday register variation;
-\item
-  \textbf{Medical Triage Set} (2026-05-15): 5 matched pairs covering
-  pediatric and adult health triage;
-\item
-  \textbf{Chest-Pain Triage Extension} (2026-05-15): 6 matched pairs
-  extending the medical triage scenarios;
-\item
-  \textbf{Financial-Stress Pair} (2026-05-15): 1 matched pair covering
-  economic strain and family/work advice;
-\item
-  \textbf{Sensitive Safety Set} (2026-05-16): 4 matched pairs covering
-  self-harm, violence, illegal logistics, and panic-perspective prompts.
-\end{itemize}
-
-The consolidated I/O bundle contains 328 run/prompt records over 66
-unique matched pairs: 50 from the Core Register Set, 5 from the Medical
-Triage Set, 6 from the Chest-Pain Triage Extension, 1 from the
-Financial-Stress Pair, and 4 from the Sensitive Safety Set. The 328 rows
-are repeated model/template observations over those matched pairs.
+The prompts cover five scenario areas. We test everyday advice and
+self-description questions, including epistemic and identity prompts;
+pediatric and adult medical triage, including respiratory distress,
+chest pain, high fever, seizure, and head injury; financial stress and
+family/work advice; sensitive safety prompts involving self-harm,
+violence, and illegal logistics; and one panic-attack perspective prompt.
 Public run-file provenance is recorded in
-\texttt{metadata/run\_manifest\_public.tsv}; retained full manifests are
-preserved in the controlled archive.
-
-The audit covers everyday advice and high-risk safety domains. The Core
-Register Set includes epistemic, identity, medical, legal, dream,
-relationship, and advice-seeking prompts. The Medical Triage Set and
-Chest-Pain Triage Extension focus on pediatric and adult health triage
-scenarios such as chest pain, high fever, wheezing, seizure, and head
-injury. The Financial-Stress Pair asks for practical family and work
-advice under economic strain. The Sensitive Safety Set includes
-self-harm, violence, illegal drug logistics, and a panic-attack
-perspective prompt.
+\texttt{metadata/run\_manifest\_public.tsv}; retained full manifests
+preserve dates and file-level provenance in the controlled archive.
 
 The AAVE-marked prompts contain selected features associated with AAVE
 and adjacent register cues, including habitual \texttt{be}, zero copula,
@@ -294,14 +270,14 @@ visible-reasoning runs in the 2026-05-15 and 2026-05-16 captures used
 \texttt{n\_predict=8192}.
 
 Response coding combines exact I/O review, heuristic labels, and
-case-specific evidence files. For the Core Register Set, summary files
-report completeness, token asymmetry, budget hits, and lexical screens.
-For the Sensitive Safety Set, coding distinguishes refusal, partial
-refusal, de-escalation, practical safety scaffolding, harmful
-continuation, tactical framing, and visible reasoning content. Public
-case-evidence summaries are redacted for safety; retained case-evidence
-files preserve prompt text, generation settings, provenance, and short
-evidence excerpts.
+case-specific evidence files. For the initial 50-pair answer-only
+records, summary files report completeness, token asymmetry, budget
+hits, and lexical screens. For sensitive safety prompts, coding
+distinguishes refusal, partial refusal, de-escalation, practical safety
+scaffolding, harmful continuation, tactical framing, and visible
+reasoning content. Public case-evidence summaries are redacted for
+safety; retained case-evidence files preserve prompt text, generation
+settings, provenance, and short evidence excerpts.
 
 Visible model-emitted reasoning is analyzed as output text. The trace
 rule used by the archive records generated content before a closing
@@ -325,7 +301,7 @@ Team, 2026):
   with the exact model path and GGUF file recorded in the manifest.
 \end{itemize}
 
-The model hashes used in the Sensitive Safety Set setup are:
+The model hashes used in the sensitive-prompt setup are:
 
 \begin{itemize}
 \tightlist
@@ -348,31 +324,31 @@ The consolidated I/O bundle contains 328 run/prompt records:
 \begin{itemize}
 \tightlist
 \item
-  Core Register Set: 200 records across base and Hauhau answer-only
-  runs;
+  200 records from 50 everyday/register pairs across base and Hauhau
+  answer-only runs;
 \item
-  Medical Triage Set: 40 records across base/Hauhau and
+  40 records from 5 medical-triage pairs across base/Hauhau and
   answer-only/visible-reasoning runs;
 \item
-  Chest-Pain Triage Extension: 48 records across base/Hauhau and
+  48 records from 6 chest-pain triage pairs across base/Hauhau and
   answer-only/visible-reasoning runs;
 \item
-  Financial-Stress Pair: 8 records across base/Hauhau and
+  8 records from 1 financial-stress pair across base/Hauhau and
   answer-only/visible-reasoning runs;
 \item
-  Sensitive Safety Set: 32 records across base/Hauhau and
+  32 records from 4 sensitive safety pairs across base/Hauhau and
   answer-only/visible-reasoning runs.
 \end{itemize}
 
-For the 2026-05-15 and 2026-05-16 subsets, context size is
-\texttt{16384}; the Core Register Set used context size \texttt{4096}.
-Model weights and environment files are outside the manuscript package.
-Verification metadata and archive-scope notes are preserved with the
-artifact materials.
+The 2026-05-15 and 2026-05-16 captures use context size
+\texttt{16384}; the initial 2026-05-05 answer-only capture used context
+size \texttt{4096}. Model weights and environment files are outside the
+manuscript package. Verification metadata and archive-scope notes are
+preserved with the artifact materials.
 
 \section{Results}\label{results}
 
-The Core Register Set answer-only run completed all prompt artifacts.
+The initial 50-pair answer-only run completed all prompt artifacts.
 Each run produced 100 prompt directories, 100 generated text files, and
 100 generated token files. The base answer-only run had 6 outputs that
 reached the 2,048-token budget; Hauhau answer-only had 15. In base
@@ -383,8 +359,8 @@ pairs and 14 Hauhau pairs. Direction varied by pair: in both base and
 Hauhau answer-only runs, AAVE-marked first answers were longer in 27
 pairs and paired comparison first answers were longer in 23.
 
-Pair \texttt{003} in the Core Register Set base answer-only run asks how
-to interpret the model's answer when asked whether it has beliefs. The
+Pair \texttt{003} in the initial base answer-only run asks how to
+interpret the model's answer when asked whether it has beliefs. The
 paired comparison prompt asks whether the answer should be taken ``as a
 fact about you or as you naming your limits.'' The AAVE-marked prompt
 asks the same question with matched surface edits. The resulting
@@ -396,7 +372,7 @@ longer after trimming: 383 words versus 175 words, a 2.19x word-length
 ratio. The retained pair \texttt{003} case-evidence file preserves full
 prompt text, output excerpts, and measurements.
 
-The Medical Triage Set shows a different pattern. In several emergency
+Medical triage prompts show a different pattern. In several emergency
 scenarios, both matched prompts receive the same top-level triage
 decision. The divergence appears in the amount and specificity of
 scaffolding. The clearest example is \texttt{med\_s03}, a pediatric
@@ -412,7 +388,7 @@ direction with shorter real-time guidance: 177 words versus 321 words, a
 clearest policy-facing case because the top-level safety decision
 converges while practical triage support differs.
 
-The Financial-Stress Pair shows register-conditioned empathy style. In
+The financial-stress pair shows register-conditioned empathy style. In
 the Hauhau answer-only run, both matched prompts receive long, serious,
 practical answers. The AAVE-marked response uses a peer-solidarity frame
 and a toughness/endurance metaphor, calling the user a warrior and
@@ -425,7 +401,7 @@ mindset. Both responses mirror the user's closing address term, using
 comparison prompt. That symmetry shows register matching in both
 directions while the deeper empathy frame still diverges.
 
-Sensitive Safety Set runs show how refusal-reduced models can expose
+Sensitive safety runs show how refusal-reduced models can expose
 response trajectories. Base answer-only often refuses or partially
 refuses violence and drug-logistics prompts across both prompt surfaces.
 Hauhau answer-only more often continues the scenario. The clearest
@@ -525,8 +501,8 @@ construction across naturalistic AAVE, additional English varieties, and
 multilingual settings.
 
 The paired comparison prompts form a corpus condition. Their formality
-varies across audit subsets, and the Chest-Pain Triage Extension
-includes more clinical wording than the Core Register Set. This
+varies across scenario areas, and the chest-pain triage prompts include
+more clinical wording than the initial everyday/register prompts. This
 variation is part of the archived audit surface and should be coded
 explicitly in follow-up studies.
 
