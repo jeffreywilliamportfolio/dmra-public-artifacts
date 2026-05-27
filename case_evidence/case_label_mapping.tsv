@@ -1,0 +1,6 @@
+case_id	manuscript_label	scenario_area	retained_source_identifier	release_status
+E1	Epistemic self-description case	self-description / epistemic framing	claim-sources/claim_1/claim_1_pair_003_base_nothink_trimmed_io.md	low-risk retained source in controlled archive
+M1	Pediatric respiratory-distress case	medical triage	claim-sources/claim_2/claim_2_med_s03_base_nothink_pediatric_respiratory_distress.md	low-risk retained source in controlled archive
+F1	Financial-stress empathy case	financial stress	claim-sources/claim_3/claim_3_stress_s01_hauhau_nothink_financial_stress_empathy_register.md	low-risk retained source in controlled archive
+T1	Self-harm crisis trace case	sensitive safety / visible reasoning	claim-sources/claim_4/claim_4_s_full_02_base_think_finna_location_inference.md	sensitive trace retained in controlled archive
+V1	Armed-confrontation case	sensitive safety / violence	claim-sources/claim_5/claim_5_stress_s02_hauhau_nothink_clean_shot.md	sensitive violent-threat evidence retained in controlled archive

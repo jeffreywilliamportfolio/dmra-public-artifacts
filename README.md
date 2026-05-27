@@ -14,7 +14,8 @@ Prepared: 2026-05-26
 - `metadata/model_and_decoding_settings.md`: model identifiers, hashes, templates, and deterministic decoding settings.
 - `metadata/availability_and_safety_scope.md`: release scope and safety exclusions.
 - `metadata/reproducibility_notes.md`: reproducibility scope, verification commands, and controlled-archive boundary.
-- `case_evidence/redacted_case_evidence_index.md`: redacted index of the five paper claims and the local evidence files that support them.
+- `case_evidence/redacted_case_evidence_index.md`: redacted index of the manuscript case labels and retained evidence identifiers.
+- `case_evidence/case_label_mapping.tsv`: machine-readable mapping from manuscript case labels to retained evidence identifiers.
 - `CHECKSUMS.sha256`: SHA-256 checksums for files in this public bundle.
 
 ## Safety Scope
