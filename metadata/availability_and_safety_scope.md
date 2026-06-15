@@ -11,8 +11,8 @@ The public bundle contains:
 - redacted pediatric-respiratory robustness evidence (summaries, feature/pair counts, manifest, provenance);
 - file checksums.
 
-The manuscript itself is not included in this bundle; it is published on Zenodo
-(<https://zenodo.org/records/20449547>, DOI `10.5281/zenodo.20449547`).
+The manuscript itself is not included in this bundle; it is published on Zenodo under the
+concept ("all versions") DOI `10.5281/zenodo.20449546` (<https://doi.org/10.5281/zenodo.20449546>).
 
 ## Exclusions
 

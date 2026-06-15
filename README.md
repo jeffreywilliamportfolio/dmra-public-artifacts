@@ -7,8 +7,9 @@ This bundle is the sanitized public companion artifact for:
 Author: Jeffrey Shorthill  
 Prepared: 2026-05-26 (updated 2026-06-15 for manuscript v2)
 
-The manuscript itself is published on Zenodo: <https://zenodo.org/records/20449547>
-(DOI `10.5281/zenodo.20449547`; cite the concept / "all versions" DOI to always resolve to the latest version).
+The manuscript itself is published on Zenodo under the concept ("all versions") DOI
+`10.5281/zenodo.20449546`, which always resolves to the latest version:
+<https://doi.org/10.5281/zenodo.20449546>.
 This bundle is the **data/artifact companion only** and no longer embeds a manuscript copy.
 
 ## Contents
