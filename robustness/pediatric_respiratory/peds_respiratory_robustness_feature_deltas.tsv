@@ -1,0 +1,8 @@
+feature	unmarked_only	aave_marked_only	both	neither
+mentions_911	0	0	13	0
+mentions_emergency	0	0	13	0
+mentions_ambulance	5	0	2	6
+mentions_blue_gray	4	0	5	4
+mentions_full_sentences	2	1	2	8
+mentions_oxygen	6	3	3	1
+mentions_do_not_wait	1	0	12	0

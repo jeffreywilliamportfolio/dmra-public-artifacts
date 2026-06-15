@@ -4,12 +4,15 @@
 
 The public bundle contains:
 
-- manuscript source snapshots;
 - consolidated run-level provenance;
 - model identifiers and hashes;
 - deterministic decoding settings;
 - redacted claim-evidence index;
+- redacted pediatric-respiratory robustness evidence (summaries, feature/pair counts, manifest, provenance);
 - file checksums.
+
+The manuscript itself is not included in this bundle; it is published on Zenodo
+(<https://zenodo.org/records/20449547>, DOI `10.5281/zenodo.20449547`).
 
 ## Exclusions
 
@@ -28,4 +31,4 @@ The private controlled archive retains raw generations, untrimmed outputs, and e
 
 ## License Note
 
-The paper source, public metadata, and redacted public summaries in this bundle are released under Creative Commons Attribution 4.0 International (CC BY 4.0). The controlled archive has no public reuse license.
+The public metadata and redacted public summaries in this bundle are released under Creative Commons Attribution 4.0 International (CC BY 4.0). The manuscript is licensed separately on Zenodo (CC BY 4.0). The controlled archive has no public reuse license.

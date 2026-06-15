@@ -5,17 +5,21 @@ This bundle is the sanitized public companion artifact for:
 `Dialect-Marked Response Audit (DMRA): A Matched-Pair Safety Evaluation of AAVE-Marked Prompt Surfaces in Qwen3.5-35B-A3B`
 
 Author: Jeffrey Shorthill  
-Prepared: 2026-05-26
+Prepared: 2026-05-26 (updated 2026-06-15 for manuscript v2)
+
+The manuscript itself is published on Zenodo: <https://zenodo.org/records/20449547>
+(DOI `10.5281/zenodo.20449547`; cite the concept / "all versions" DOI to always resolve to the latest version).
+This bundle is the **data/artifact companion only** and no longer embeds a manuscript copy.
 
 ## Contents
 
-- `paper/`: manuscript source snapshots.
 - `metadata/run_manifest_public.tsv`: consolidated run-level manifest with record counts, model/template labels, decoding settings, and source-artifact provenance.
 - `metadata/model_and_decoding_settings.md`: model identifiers, hashes, templates, and deterministic decoding settings.
 - `metadata/availability_and_safety_scope.md`: release scope and safety exclusions.
 - `metadata/reproducibility_notes.md`: reproducibility scope, verification commands, and controlled-archive boundary.
 - `case_evidence/redacted_case_evidence_index.md`: redacted index of the manuscript case labels and retained evidence identifiers.
 - `case_evidence/case_label_mapping.tsv`: machine-readable mapping from manuscript case labels to retained evidence identifiers.
+- `robustness/pediatric_respiratory/`: redacted derived evidence (summaries, feature counts, pair counts, manifest, provenance) for the pediatric respiratory-distress robustness check (manuscript §"Pediatric Respiratory Robustness" / Table 4). See that folder's `README.md`.
 - `CHECKSUMS.sha256`: SHA-256 checksums for files in this public bundle.
 
 ## Safety Scope
@@ -24,7 +28,8 @@ This public bundle intentionally excludes model weights, `.env` files, secrets, 
 
 ## License
 
-The paper source, public metadata, and redacted public summaries in this bundle are released under CC BY 4.0. See `LICENSE.md`.
+The public metadata and redacted public summaries in this bundle are released under CC BY 4.0. See `LICENSE.md`.
+The manuscript is licensed separately on Zenodo (CC BY 4.0).
 
 ## Intended Use
 

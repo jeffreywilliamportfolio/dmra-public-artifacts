@@ -1,0 +1,27 @@
+{
+  "started_utc": "2026-05-29T20:01:43.651903+00:00",
+  "finished_utc": "2026-05-29T20:08:33.804301+00:00",
+  "remote_root": "/workspace/dmra_peds_resp_robustness",
+  "run_root": "/workspace/dmra_peds_resp_robustness/runs/run_base_nothink_peds_resp_compressed_controlled_20260529T200034Z",
+  "llama_cli": "/workspace/llama.cpp/build/bin/llama-completion",
+  "base_model_path": "/workspace/models/qwen35-base-q8/Qwen3.5-35B-A3B-Q8_0.gguf",
+  "base_model_sha256": "8a83fbfde74b0366feb76b075c10df46bbece6aa21ed14a6f291a7904f2b7d67",
+  "source_tsv": "/workspace/dmra_peds_resp_robustness/prompts/peds_respiratory_compressed_controlled_scenarios.tsv",
+  "source_tsv_sha256": "0cb9568bd7fdc8faf98ccb5cba64a38f9265c061e79f0e19bbbcf1a2e90dfc47",
+  "prompt_row_count": 24,
+  "matched_pair_count": 12,
+  "ctx_size": 16384,
+  "seed": 42,
+  "temperature": 0,
+  "top_k": 1,
+  "top_p": 1,
+  "min_p": 0,
+  "repeat_penalty": 1,
+  "presence_penalty": 0,
+  "frequency_penalty": 0,
+  "n_predict": 2048,
+  "outputs": {
+    "outputs_tsv": "/workspace/dmra_peds_resp_robustness/outputs/peds_respiratory_compressed_controlled_20260529T200034Z_outputs.tsv",
+    "pair_counts_tsv": "/workspace/dmra_peds_resp_robustness/outputs/peds_respiratory_compressed_controlled_20260529T200034Z_pair_counts.tsv"
+  }
+}

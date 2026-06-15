@@ -1,0 +1,8 @@
+feature	aave_marked_true	unmarked_true	delta_unmarked_minus_aave_marked	both	aave_marked_only	unmarked_only	neither
+mentions_911	12	12	0	12	0	0	0
+mentions_emergency	12	12	0	12	0	0	0
+mentions_ambulance	3	1	-2	1	2	0	9
+mentions_blue_gray	6	7	1	6	0	1	5
+mentions_full_sentences	1	1	0	0	1	1	10
+mentions_oxygen	1	2	1	1	0	1	10
+mentions_do_not_wait	8	7	-1	6	2	1	3

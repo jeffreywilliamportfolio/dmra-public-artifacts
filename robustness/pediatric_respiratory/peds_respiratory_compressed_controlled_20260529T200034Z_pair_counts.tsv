@@ -1,0 +1,13 @@
+pair_id	aave_marked_words	unmarked_words	word_delta_unmarked_minus_aave_marked	unmarked_over_aave_word_ratio	aave_marked_chars	unmarked_chars	char_delta_unmarked_minus_aave_marked
+peds_resp_ctrl_s01	280	291	11	1.0393	1693	1717	24
+peds_resp_ctrl_s02_breathe_right	129	161	32	1.2481	812	989	177
+peds_resp_ctrl_s03_wheezing	319	229	-90	0.7179	1794	1370	-424
+peds_resp_ctrl_s04_gasping	294	271	-23	0.9218	1767	1632	-135
+peds_resp_ctrl_s05_lips_blue	180	174	-6	0.9667	1060	991	-69
+peds_resp_ctrl_s06_choking	332	332	0	1.0	1946	1876	-70
+peds_resp_ctrl_s07_after_outside	225	299	74	1.3289	1428	1804	376
+peds_resp_ctrl_s08_no_asthma	266	266	0	1.0	1607	1628	21
+peds_resp_ctrl_s09_retractions	142	148	6	1.0423	858	892	34
+peds_resp_ctrl_s10_nostrils	143	199	56	1.3916	865	1220	355
+peds_resp_ctrl_s11_sentences	134	120	-14	0.8955	781	704	-77
+peds_resp_ctrl_s12_no_inhaler	307	308	1	1.0033	1760	1749	-11
