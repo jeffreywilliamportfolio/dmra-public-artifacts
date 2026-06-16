@@ -20,7 +20,8 @@ This bundle is the **data/artifact companion only** and no longer embeds a manus
 - `metadata/reproducibility_notes.md`: reproducibility scope, verification commands, and controlled-archive boundary.
 - `case_evidence/redacted_case_evidence_index.md`: redacted index of the manuscript case labels and retained evidence identifiers.
 - `case_evidence/case_label_mapping.tsv`: machine-readable mapping from manuscript case labels to retained evidence identifiers.
-- `robustness/pediatric_respiratory/`: redacted derived evidence (summaries, feature counts, pair counts, manifest, provenance) for the pediatric respiratory-distress robustness check (manuscript §"Pediatric Respiratory Robustness" / Table 4). See that folder's `README.md`.
+- `robustness/pediatric_respiratory/`: redacted derived evidence (summaries, feature counts, pair counts, manifest, provenance) for the pediatric respiratory-distress robustness check (manuscript §"Pediatric Respiratory Robustness"). See that folder's `README.md`.
+- `robustness/finna_trace_inference/`: redacted derived evidence (feature counts) for the finna trace-inference robustness check (manuscript §"Finna Trace-Inference Robustness"). See that folder's `README.md`.
 - `CHECKSUMS.sha256`: SHA-256 checksums for files in this public bundle.
 
 ## Safety Scope

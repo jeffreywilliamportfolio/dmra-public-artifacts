@@ -9,6 +9,7 @@ The public bundle contains:
 - deterministic decoding settings;
 - redacted claim-evidence index;
 - redacted pediatric-respiratory robustness evidence (summaries, feature/pair counts, manifest, provenance);
+- redacted finna trace-inference robustness evidence (feature counts);
 - file checksums.
 
 The manuscript itself is not included in this bundle; it is published on Zenodo under the
