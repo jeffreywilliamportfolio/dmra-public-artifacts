@@ -10,6 +10,9 @@ The public bundle contains:
 - redacted claim-evidence index;
 - redacted pediatric-respiratory robustness evidence (summaries, feature/pair counts, manifest, provenance);
 - redacted finna trace-inference robustness evidence (feature counts);
+- the frame-aware coding of the isolation matrix (`coding/`): rubric, per-row classes and scores with all
+  prompt/trace/answer text removed, pairwise signed deltas, trace-pathway audit with descriptive notes for
+  unsafe-planning traces withheld, and per-arm final-answer pair outcomes (manuscript v4 Table 3);
 - file checksums.
 
 The manuscript itself is not included in this bundle; it is published on Zenodo under the

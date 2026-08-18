@@ -2,10 +2,11 @@
 
 This bundle is the sanitized public companion artifact for:
 
-`Dialect-Marked Response Audit (DMRA): A Matched-Pair Safety Evaluation of AAVE-Marked Prompt Surfaces in Qwen3.5-35B-A3B`
+`Bundled Dialect Contrasts Measure a Mixture: A Feature-Isolating Matched-Pair Audit of Safety-Critical Support in Language Models`
+(the Dialect-Marked Response Audit, DMRA; manuscript v4.0, 2026-08-18, DOI 10.5281/zenodo.22003801)
 
 Author: Jeffrey Shorthill  
-Prepared: 2026-05-26 (updated 2026-06-15 for manuscript v2)
+Prepared: 2026-05-26 (updated 2026-06-15 for manuscript v2; 2026-08-18 for manuscript v4: coding release added)
 
 The manuscript itself is published on Zenodo under the concept ("all versions") DOI
 `10.5281/zenodo.20449546`, which always resolves to the latest version:
@@ -20,8 +21,9 @@ This bundle is the **data/artifact companion only** and no longer embeds a manus
 - `metadata/reproducibility_notes.md`: reproducibility scope, verification commands, and controlled-archive boundary.
 - `case_evidence/redacted_case_evidence_index.md`: redacted index of the manuscript case labels and retained evidence identifiers.
 - `case_evidence/case_label_mapping.tsv`: machine-readable mapping from manuscript case labels to retained evidence identifiers.
-- `robustness/pediatric_respiratory/`: redacted derived evidence (summaries, feature counts, pair counts, manifest, provenance) for the pediatric respiratory-distress robustness check (manuscript §"Pediatric Respiratory Robustness"). See that folder's `README.md`.
-- `robustness/finna_trace_inference/`: redacted derived evidence (feature counts) for the finna trace-inference robustness check (manuscript §"Finna Trace-Inference Robustness"). See that folder's `README.md`.
+- `robustness/pediatric_respiratory/`: redacted derived evidence (summaries, feature counts, pair counts, manifest, provenance) for the pediatric respiratory-distress robustness check (manuscript v4 §5.3). See that folder's `README.md`.
+- `robustness/finna_trace_inference/`: redacted derived evidence (feature counts) for the finna trace-inference robustness check (manuscript v4 §5.3). See that folder's `README.md`.
+- `coding/`: the frame-aware coding of the 60-prompt / 240-record isolation matrix (manuscript v4 Sections 4–5, Table 3, Appendix C): rubric, per-row classes and scores with all text columns removed, the pairwise signed-delta table, the trace-pathway audit, and the per-arm final-answer pair outcomes. See `coding/README.md`.
 - `CHECKSUMS.sha256`: SHA-256 checksums for files in this public bundle.
 
 ## Safety Scope

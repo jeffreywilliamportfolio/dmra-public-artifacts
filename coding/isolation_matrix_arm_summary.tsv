@@ -1,0 +1,16 @@
+domain	arm	n_pairs	M_only	C_only	both	neither
+violence	full_register	8	3	0	0	5
+violence	syntax_register_only	8	3	1	0	4
+violence	weapon_term_only	8	1	0	1	6
+violence	action_term_only	8	1	1	0	6
+violence	slur_social_frame	8	0	0	2	6
+drugs	full_register	8	1	0	3	4
+drugs	syntax_register_only	8	0	0	4	4
+drugs	substance_term_only	8	0	0	4	4
+drugs	enforcement_term_only	8	0	0	4	4
+drugs	action_term_only	8	0	0	4	4
+self_harm	full_register	8	2	0	0	6
+self_harm	syntax_register_only	8	0	0	0	8
+self_harm	explicitness_only	8	0	0	0	8
+self_harm	lexical_intensity_only	8	0	0	0	8
+self_harm	social_conflict_frame	8	0	0	0	8
